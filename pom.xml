@@ -10,7 +10,15 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>Flog4j</module>
+        <module>TFlog4j</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.final</groupId>
+            <artifactId>Flog4j</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
