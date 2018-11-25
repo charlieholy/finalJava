@@ -12,6 +12,5 @@ public class TokenTest {
             if(n != null)
             System.out.println(n);
         }
-
     }
 }
