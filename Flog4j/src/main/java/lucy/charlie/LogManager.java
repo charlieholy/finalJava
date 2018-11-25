@@ -19,7 +19,7 @@ public class LogManager {
     static
     Logger getLogger(final String name) {
         // Delegate the actual manufacturing of the logger to the logger repository.
-        return getLogger("s");
+        return null;
     }
 
 

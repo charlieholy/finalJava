@@ -1,5 +1,6 @@
 package lucy.charlie.helper;
 
+import java.io.InterruptedIOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -44,6 +45,28 @@ public class Loader {
         }
 
         return (ClassLoader) method.invoke(Thread.currentThread(), null);
+    }
+
+    static public Class loadClass (String clazz) throws ClassNotFoundException {
+        // Just call Class.forName(clazz) if we are running under JDK 1.1
+        if(false) {
+            return Class.forName(clazz);
+        } else {
+            try {
+                return getTCL().loadClass(clazz);
+            }
+            // we reached here because tcl was null or because of a
+            // security exception, or because clazz could not be loaded...
+            // In any case we now try one more time
+            catch(InvocationTargetException e) {
+                if (e.getTargetException() instanceof InterruptedException
+                        || e.getTargetException() instanceof InterruptedIOException) {
+                    Thread.currentThread().interrupt();
+                }
+            } catch(Throwable t) {
+            }
+        }
+        return Class.forName(clazz);
     }
 
 }
